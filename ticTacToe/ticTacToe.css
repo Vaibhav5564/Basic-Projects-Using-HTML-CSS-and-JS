@@ -33,7 +33,7 @@ main{
        height: 18vmin;
        width: 18vmin;
        font-size: 8vmin;
-       box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
+       box-shadow: 0 0 1rem rgba(5, 5, 5, 0.3);
 }
 .game:hover{
        border:0.25rem red solid;
