@@ -13,7 +13,7 @@ body {
     width: min(80vw, 360px);
     aspect-ratio: 1 / 1;
 
-    border: 5px solid rgb(197, 232, 59);
+    border: 5px solid rgb(196, 230, 63);
     margin: 40px auto;
     border-radius: 10%;
 }
