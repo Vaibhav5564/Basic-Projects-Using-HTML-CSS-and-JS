@@ -14,7 +14,7 @@ body {
 .outerDiv{
        height: 60vh;
        width: 60vh;
-       background-color: rgb(95, 99, 98);
+       background-color: rgb(105, 109, 108);
        border: 10px rgb(31, 30, 30) solid;
 }
 .inputDiv{
