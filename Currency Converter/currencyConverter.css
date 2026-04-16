@@ -8,13 +8,15 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 97vh;
-   background-color: rgb(34, 32, 32);
-  border: 10px rgb(1, 1, 1) solid;
+  background: #020024;
+background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+  border: 0.5rem rgb(0, 0, 0) solid;
 }
 .outerDiv{
        height: 60vh;
        width: 60vh;
-       background-color: rgb(105, 109, 108);
+       background: #EEAECA;
+background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
        border: 10px rgb(31, 30, 30) solid;
 }
 .inputDiv{
@@ -25,6 +27,20 @@ body {
        justify-content: center;
        margin-top: 1rem;
 }
+
+.inputDiv:hover input {
+    border-color: red;
+}
+
+.inputDiv input {
+    transition: 0.3s;
+}
+
+.inputDiv input:focus {
+    border-color: lime;
+    outline: none;
+}
+
 .innerDiv{
        display: flex;
        align-items: center;
@@ -41,6 +57,7 @@ body {
        text-align: center;
        color: rgb(237, 8, 8);
 }
+
 img{
        border: 2px rgb(1, 1, 1) solid;
        max-width: 3rem;
@@ -50,21 +67,29 @@ select{
 }
 .headingDiv{
        text-align: center;
-       color: rgb(101, 214, 49);
+       color: rgb(167, 30, 30);
 }
 .buttonDiv{
-       margin-top: 1rem;
+       margin-top: 2rem;
        display: flex;
        justify-content: center;
 }
+
+
 .buttonDiv button{
        height: 2rem;
-       color: blue;
+       color: rgb(255, 255, 255);
        border-radius: 10%;
        cursor: pointer;
        border: 4px rgb(1, 1, 1) solid;
-       background-color: rgb(55, 52, 52);
+       background-color: rgb(136, 129, 129);
 }
+
+.buttonDiv button:hover{
+       border: 2px solid red;
+       color:rgb(128, 17, 45)
+}
+
 .inputDiv input{
        text-align: center;
        border-radius: 5%;
