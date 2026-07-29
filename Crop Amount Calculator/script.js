@@ -1,38 +1,85 @@
-let todayRate = 0;
+let isCalculated = false;
 
-// Save Rate
-function setRate() {
+// Save rate whenever user types
+document.addEventListener("DOMContentLoaded", function () {
 
-    const rate = document.getElementById("rate").value;
+    const rateInput = document.getElementById("rate");
+    const saveBtn = document.getElementById("saveBtn");
 
-    if (rate === "" || rate <= 0) {
-        alert("Please enter a valid rate.");
-        return;
+    // Restore saved rate
+    const savedRate = localStorage.getItem("cropRate");
+    if (savedRate !== null) {
+        rateInput.value = savedRate;
     }
 
-    todayRate = Number(rate);
+    // Disable Save initially
+    saveBtn.disabled = true;
 
-    document.querySelector(".rate-box").style.display = "none";
-    document.getElementById("calculator").style.display = "block";
+    // Save rate whenever it changes
+    rateInput.addEventListener("input", function () {
+        localStorage.setItem("cropRate", this.value);
+    });
 
-}
+    // Prevent save before calculate
+    document.querySelector("form").addEventListener("submit", function (e) {
 
-// Calculate
-// Calculate
+        if (!isCalculated) {
+            e.preventDefault();
+            alert("Please click Calculate before saving.");
+            return;
+        }
+
+    });
+
+    // After successful save, clear everything except rate
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.get("saved") === "1") {
+
+        document.querySelector("input[name='customer_name']").value = "";
+        document.getElementById("length").value = "";
+        document.getElementById("breadth").value = "";
+
+        document.getElementById("area").innerHTML = "0.00";
+        document.getElementById("amount").innerHTML = "0.00";
+
+        document.getElementById("calculated_area").value = "";
+        document.getElementById("display_area").value = "";
+        document.getElementById("total_amount").value = "";
+
+        saveBtn.disabled = true;
+        isCalculated = false;
+
+        window.history.replaceState({}, document.title, "index.php");
+    }
+
+});
+
 function calculate() {
 
-    const length = Number(document.getElementById("length").value);
-    const breadth = Number(document.getElementById("breadth").value);
+    let rate = parseFloat(document.getElementById("rate").value);
+    let length = parseFloat(document.getElementById("length").value);
+    let breadth = parseFloat(document.getElementById("breadth").value);
 
-    if (length <= 0 || breadth <= 0) {
-        alert("Please enter valid length and breadth.");
+    if (isNaN(rate) || isNaN(length) || isNaN(breadth)) {
+        alert("Please fill all fields.");
         return;
     }
 
-    const calculatedArea = (length * breadth) / 2178;
-    const area = calculatedArea / 20;
-    const amount = calculatedArea * todayRate;
+    let calculatedArea = (length * breadth) / 2178;
+    let displayArea = calculatedArea * 2;
+    let amount = calculatedArea * rate;
 
-    document.getElementById("rAmount").textContent = amount.toFixed(2);
+    document.getElementById("area").innerHTML = displayArea.toFixed(2) + " गुंठे";
+    document.getElementById("amount").innerHTML = amount.toFixed(2);
 
+    document.getElementById("calculated_area").value = calculatedArea.toFixed(4);
+    document.getElementById("display_area").value = displayArea.toFixed(4);
+    document.getElementById("total_amount").value = amount.toFixed(2);
+
+    // Keep latest rate
+    localStorage.setItem("cropRate", rate);
+
+    isCalculated = true;
+    document.getElementById("saveBtn").disabled = false;
 }
