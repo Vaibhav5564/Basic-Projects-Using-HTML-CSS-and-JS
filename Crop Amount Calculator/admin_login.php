@@ -48,12 +48,12 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
             <div class="input-group">
                 <label>Username</label>
-                <input type="text" name="username" required>
+                <input type="text" placeholder="Enter Admin's Username" name="username" required>
             </div>
 
             <div class="input-group">
                 <label>Password</label>
-                <input type="password" name="password" required>
+                <input type="password" placeholder="Enter Password" name="password" required>
             </div>
 
             <button type="submit">
