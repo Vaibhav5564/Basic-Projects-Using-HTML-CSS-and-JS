@@ -122,6 +122,12 @@ if (!isset($_SESSION['user_id'])) {
 </div>
 
 <script src="script.js"></script>
-
+<script>
+window.addEventListener("pageshow", function (event) {
+    if (event.persisted) {
+        window.location.reload();
+    }
+});
+</script>
 </body>
 </html>

@@ -4,6 +4,12 @@ ini_set('display_errors', 1);
 
 session_start();
 
+/* Prevent browser caching */
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+header("Expires: 0");
+
 if (!isset($_SESSION['admin'])) {
     header("Location: admin_login.php");
     exit();
@@ -134,7 +140,13 @@ $customers = $pdo->query("SELECT * FROM customers ORDER BY id DESC");
         🚪 Logout
     </a>
 </div>
-
+<script>
+window.addEventListener("pageshow", function (event) {
+    if (event.persisted) {
+        window.location.reload();
+    }
+});
+</script>
 </body>
 
 </html>
