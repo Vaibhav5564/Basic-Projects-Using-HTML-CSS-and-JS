@@ -5,6 +5,11 @@
     font-family:Arial, Helvetica, sans-serif;
 }
 
+html,
+body{
+    overflow-x:hidden;
+}
+
 body{
     min-height:100vh;
     display:flex;
@@ -146,65 +151,72 @@ button:hover{
 @media (max-width:480px){
 
     body{
+        min-height:100vh;
         padding:12px;
+        overflow-x:hidden;
     }
-    
-    @media (max-width:480px){
+
+    .admin-container{
+        width:100%;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
+
     .admin-box{
+        width:100%;
+        max-width:100%;
         min-height:80vh;
         display:flex;
         flex-direction:column;
         justify-content:center;
-    }
-}
-    .admin-box{
-        width:100%;
-        max-width:100%;
-        padding:45px 30px;
-        border-radius:22px;
+        padding:40px 24px;
+        border-radius:20px;
     }
 
     .admin-icon{
-        font-size:80px;
-        margin-bottom:25px;
+        font-size:72px;
+        margin-bottom:20px;
     }
 
     .admin-box h1{
-        font-size:36px;
-        margin-bottom:15px;
+        font-size:32px;
+        margin-bottom:12px;
     }
 
     .subtitle{
-        font-size:19px;
-        margin-bottom:35px;
+        font-size:17px;
+        margin-bottom:30px;
     }
 
     .input-group{
-        margin-bottom:28px;
+        margin-bottom:24px;
     }
 
     .input-group label{
-        font-size:18px;
-        margin-bottom:10px;
+        font-size:17px;
+        margin-bottom:8px;
     }
 
     .input-group input{
-        padding:18px;
-        font-size:18px;
-        border-radius:12px;
+        width:100%;
+        padding:16px;
+        font-size:17px;
+        border-radius:10px;
     }
 
     button{
-        padding:18px;
-        font-size:19px;
-        border-radius:12px;
+        width:100%;
+        padding:16px;
+        font-size:18px;
+        border-radius:10px;
     }
 
     .back-login-btn{
         width:100%;
-        padding:18px;
-        font-size:18px;
-        border-radius:12px;
-        margin-top:22px;
+        padding:16px;
+        font-size:17px;
+        border-radius:10px;
+        margin-top:20px;
     }
 }
