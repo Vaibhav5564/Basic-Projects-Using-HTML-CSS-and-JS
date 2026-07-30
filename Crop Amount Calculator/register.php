@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    $check = $db->prepare("SELECT id FROM users WHERE email = ?");
+    $check = $pdo->prepare("SELECT id FROM users WHERE email = ?");
     $check->execute([$email]);
 
     if ($check->fetch()) {
@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     } else {
 
-        $stmt = $db->prepare("INSERT INTO users(name,email,password) VALUES(?,?,?)");
+       $stmt = $pdo->prepare("INSERT INTO users(name,email,password) VALUES(?,?,?)");
 
         $stmt->execute([$name,$email,$password]);
 

@@ -1,0 +1,205 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#4CAF50,#2196F3);
+    padding:20px;
+}
+
+.admin-container{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* Bigger Login Card */
+.admin-box{
+    width:100%;
+    max-width:650px;
+    min-height:720px;
+    background:#fff;
+    padding:55px;
+    border-radius:22px;
+    box-shadow:0 18px 40px rgba(0,0,0,.25);
+}
+
+/* Bigger Icon */
+.admin-icon{
+    font-size:85px;
+    text-align:center;
+    margin-bottom:20px;
+}
+
+/* Bigger Heading */
+.admin-box h1{
+    text-align:center;
+    color:#1e3a8a;
+    font-size:40px;
+    margin-bottom:12px;
+}
+
+/* Subtitle */
+.subtitle{
+    text-align:center;
+    color:#666;
+    font-size:20px;
+    margin-bottom:40px;
+}
+
+/* Input Groups */
+.input-group{
+    margin-bottom:28px;
+}
+
+.input-group label{
+    display:block;
+    margin-bottom:10px;
+    font-weight:bold;
+    color:#444;
+    font-size:19px;
+}
+
+/* Bigger Inputs */
+.input-group input{
+    width:100%;
+    padding:18px;
+    border:1px solid #ccc;
+    border-radius:12px;
+    font-size:18px;
+    outline:none;
+    transition:.3s;
+}
+
+.input-group input:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 10px rgba(37,99,235,.25);
+}
+
+/* Login Button */
+button{
+    width:100%;
+    padding:18px;
+    border:none;
+    border-radius:12px;
+    background:#2563eb;
+    color:#fff;
+    font-size:20px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    background:#1d4ed8;
+    transform:translateY(-2px);
+}
+
+/* Back Button */
+.back-login-btn{
+    display:block;
+    width:260px;
+    margin:24px auto 0;
+    padding:16px;
+    text-align:center;
+    text-decoration:none;
+    color:#fff;
+    background:#dc2626;
+    border-radius:12px;
+    font-size:18px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.back-login-btn:hover{
+    background:#b91c1c;
+    transform:translateY(-2px);
+}
+
+
+/* ===========================
+   Tablet
+=========================== */
+
+@media(max-width:768px){
+
+    .admin-box{
+        max-width:560px;
+        min-height:650px;
+        padding:40px;
+    }
+
+    .admin-box h1{
+        font-size:34px;
+    }
+
+    .subtitle{
+        font-size:18px;
+    }
+
+    .admin-icon{
+        font-size:72px;
+    }
+}
+
+
+/* ===========================
+   Mobile
+=========================== */
+
+@media(max-width:480px){
+
+    body{
+        padding:15px;
+    }
+
+    .admin-box{
+        width:96%;
+        max-width:none;
+        min-height:auto;
+        padding:32px 24px;
+        border-radius:18px;
+    }
+
+    .admin-icon{
+        font-size:60px;
+        margin-bottom:15px;
+    }
+
+    .admin-box h1{
+        font-size:30px;
+    }
+
+    .subtitle{
+        font-size:16px;
+        margin-bottom:28px;
+    }
+
+    .input-group label{
+        font-size:16px;
+    }
+
+    .input-group input{
+        padding:15px;
+        font-size:16px;
+    }
+
+    button{
+        padding:15px;
+        font-size:17px;
+    }
+
+    .back-login-btn{
+        width:100%;
+        padding:15px;
+        font-size:17px;
+    }
+}

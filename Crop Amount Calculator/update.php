@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require "db.php";
 
 if (!isset($_SESSION['user_id'])) {
@@ -9,12 +11,12 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-if (!isset($_GET['id'])) {
+if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     header("Location: customers.php");
     exit();
 }
 
-$id = $_GET['id'];
+$id = (int)$_GET['id'];
 
 $stmt = $pdo->prepare("SELECT * FROM customers WHERE id = ? AND user_id = ?");
 $stmt->execute([$id, $user_id]);
@@ -25,16 +27,15 @@ if (!$row) {
     die("Customer not found or access denied.");
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $customer_name = trim($_POST['customer_name']);
-    $length = $_POST['length'];
-    $breadth = $_POST['breadth'];
-    $rate = $_POST['rate'];
+    $length = (float)$_POST['length'];
+    $breadth = (float)$_POST['breadth'];
+    $rate = (float)$_POST['rate'];
 
-    // Calculations
     $calculated_area = ($length * $breadth) / 2178;
-    $display_area = $calculated_area * 2;
+    $display_area = $calculated_area;
     $amount = $calculated_area * $rate;
 
     $stmt = $pdo->prepare("
@@ -62,10 +63,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user_id
     ]);
 
-    header("Location: customers.php");
+    header("Location: customers.php?updated=1");
     exit();
 }
-
 ?>
 
 <!DOCTYPE html>

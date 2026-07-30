@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 require 'db.php';
 
 if (!isset($_SESSION['user_id'])) {
@@ -11,6 +14,7 @@ $user_id = $_SESSION['user_id'];
 $stmt = $pdo->prepare("SELECT * FROM customers WHERE user_id = ? ORDER BY id DESC");
 $stmt->execute([$user_id]);
 $customers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +23,7 @@ $customers = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Customers</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -39,66 +44,64 @@ $customers = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <table id="customerTable">
 
             <thead>
-
-            <tr>
-                <th>ID</th>
-                <th>Customer</th>
-                <th>Length</th>
-                <th>Breadth</th>
-                <th>Rate</th>
-                <th>Amount</th>
-                <th>Action</th>
-            </tr>
-
+                <tr>
+                    <th>ID</th>
+                    <th>Customer</th>
+                    <th>Length</th>
+                    <th>Breadth</th>
+                    <th>Rate</th>
+                    <th>Amount</th>
+                    <th>Action</th>
+                </tr>
             </thead>
 
             <tbody>
 
-            <?php if(count($customers)>0): ?>
+            <?php if (count($customers) > 0): ?>
 
-                <?php foreach($customers as $row): ?>
+                <?php foreach ($customers as $row): ?>
 
-                <tr>
+                    <tr>
 
-                    <td><?= $row['id']; ?></td>
+                        <td><?= $row['id']; ?></td>
 
-                    <td><?= htmlspecialchars($row['customer_name']); ?></td>
+                        <td><?= htmlspecialchars($row['customer_name']); ?></td>
 
-                    <td><?= $row['length']; ?></td>
+                        <td><?= $row['length']; ?></td>
 
-                    <td><?= $row['breadth']; ?></td>
+                        <td><?= $row['breadth']; ?></td>
 
-                    <td>₹ <?= number_format($row['rate'],2); ?></td>
+                        <td>₹ <?= number_format($row['rate'], 2); ?></td>
 
-                    <td>₹ <?= number_format($row['amount'],2); ?></td>
+                        <td>₹ <?= number_format($row['amount'], 2); ?></td>
 
-                    <td>
+                        <td>
 
-                        <a class="btn edit"
-                           href="update.php?id=<?= $row['id']; ?>">
-                           Edit
-                        </a>
+                            <a
+                                class="btn edit"
+                                href="update.php?id=<?= $row['id']; ?>">
+                                Edit
+                            </a>
 
-                        <a class="btn delete"
-                           href="delete.php?id=<?= $row['id']; ?>"
-                           onclick="return confirm('Delete this customer?');">
-                           Delete
-                        </a>
+                            <a
+                                class="btn delete"
+                                href="delete.php?id=<?= $row['id']; ?>"
+                                onclick="return confirm('Are you sure you want to delete this customer?');">
+                                Delete
+                            </a>
 
-                    </td>
+                        </td>
 
-                </tr>
+                    </tr>
 
                 <?php endforeach; ?>
 
             <?php else: ?>
 
                 <tr>
-
                     <td colspan="7" style="text-align:center;padding:25px;">
-                        No Customers Found
+                        No customers found.
                     </td>
-
                 </tr>
 
             <?php endif; ?>
@@ -117,36 +120,30 @@ $customers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <br>
 
-    <a href="logout.php" class="logout-btn">
-        🚪 Logout
-    </a>
-
 </div>
 
 <script>
 
-function searchCustomer(){
+function searchCustomer() {
 
-    let input=document.getElementById("search").value.toLowerCase();
+    let input = document.getElementById("search").value.toLowerCase();
 
-    let table=document.getElementById("customerTable");
+    let table = document.getElementById("customerTable");
 
-    let tr=table.getElementsByTagName("tr");
+    let rows = table.getElementsByTagName("tr");
 
-    for(let i=1;i<tr.length;i++){
+    for (let i = 1; i < rows.length; i++) {
 
-        let td=tr[i].getElementsByTagName("td")[1];
+        let td = rows[i].getElementsByTagName("td")[1];
 
-        if(td){
+        if (td) {
 
-            let txt=td.textContent || td.innerText;
+            let txt = td.textContent || td.innerText;
 
-            tr[i].style.display=txt.toLowerCase().indexOf(input)>-1 ? "" : "none";
-
+            rows[i].style.display =
+                txt.toLowerCase().includes(input) ? "" : "none";
         }
-
     }
-
 }
 
 </script>

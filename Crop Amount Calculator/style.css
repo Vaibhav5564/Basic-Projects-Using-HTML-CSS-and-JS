@@ -6,158 +6,180 @@
 }
 
 body{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
     background:linear-gradient(135deg,#4CAF50,#2196F3);
+    min-height:100vh;
+    padding:20px;
 }
+
+/* ===========================
+   Container
+=========================== */
 
 .container{
     width:100%;
-    max-width:500px;
-    padding:30px;
-    border-radius:20px;
+    max-width:1100px;
+    margin:auto;
     background:rgba(255,255,255,.18);
     backdrop-filter:blur(15px);
     border:1px solid rgba(255,255,255,.3);
+    border-radius:20px;
+    padding:30px;
     box-shadow:0 20px 40px rgba(0,0,0,.25);
 }
 
-.customers-container{
-    max-width:1200px;
+/* ===========================
+   Headings
+=========================== */
+
+h1,
+h2,
+h3{
+    color:#fff;
+    text-align:center;
+    margin-bottom:20px;
 }
 
-h1,h2,h3{
-    text-align:center;
-    color:#fff;
-    margin-bottom:20px;
+/* ===========================
+   Login/Register Form
+=========================== */
+
+.container form{
+    max-width:450px;
+    margin:20px auto;
 }
 
 .input-group{
     margin-bottom:18px;
 }
 
-label{
+.input-group label{
     display:block;
-    margin-bottom:8px;
     color:#fff;
-    font-weight:600;
-}
-
-input{
-    width:100%;
-    padding:14px;
-    border:none;
-    outline:none;
-    border-radius:12px;
-    font-size:16px;
-    transition:.3s;
-}
-
-input:focus{
-    transform:scale(1.02);
-    box-shadow:0 0 12px rgba(255,255,255,.6);
-}
-
-hr{
-    margin:20px 0;
-    border:none;
-    height:1px;
-    background:rgba(255,255,255,.3);
-}
-
-/* Result */
-
-.result{
-    margin:25px 0;
-    padding:20px;
-    background:#fff;
-    border-radius:18px;
-    box-shadow:0 8px 20px rgba(0,0,0,.15);
-}
-
-.result h2{
-    color:#2e7d32;
-}
-
-.result p{
-    display:flex;
-    justify-content:space-between;
-    margin:15px 0;
-    font-size:20px;
     font-weight:bold;
+    margin-bottom:6px;
 }
 
-#area,#amount{
-    color:#9c3932;
-    font-size:20px;
-}
-
-/* Buttons */
-
-button,
-.view-btn,
-.logout-btn{
-    display:block;
+.input-group input{
     width:100%;
-    padding:14px;
-    margin-top:12px;
+    padding:12px;
     border:none;
-    border-radius:12px;
-    text-align:center;
-    text-decoration:none;
+    border-radius:10px;
+    outline:none;
+    font-size:15px;
+}
+
+/* ===========================
+   Buttons
+=========================== */
+
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#2e7d32;
     color:#fff;
-    font-size:16px;
+    font-size:15px;
     font-weight:bold;
     cursor:pointer;
     transition:.3s;
 }
 
-button:first-of-type{
-    background:#ff9800;
-}
-
-button:last-of-type{
-    background:#2ecc71;
+button:hover{
+    background:#1b5e20;
 }
 
 .view-btn{
-    background:#1565c0;
+    display:block;
+    width:100%;
+    max-width:450px;
+    margin:15px auto 10px;
+    padding:13px;
+    text-align:center;
+    text-decoration:none;
+    background:#1976D2;
+    color:#fff;
+    border-radius:10px;
+    font-size:15px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.view-btn:hover{
+    background:#1565C0;
+    transform:translateY(-2px);
+}
+
+.admin-link{
+    text-align:center;
+    margin-top:12px;
+}
+
+.admin-link a{
+    display:inline-block;
+    padding:10px 25px;
+    background:#424242;
+    color:#fff;
+    text-decoration:none;
+    border-radius:25px;
+    font-size:14px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.admin-link a:hover{
+    background:#212121;
+    transform:translateY(-2px);
 }
 
 .logout-btn{
-    background:#d32f2f;
+    display:block;
+    width:180px;
+    margin:20px auto;
+    padding:12px;
+    text-align:center;
+    text-decoration:none;
+    background:#E53935;
+    color:#fff;
+    border-radius:10px;
+    font-size:15px;
+    font-weight:bold;
+    transition:.3s;
 }
 
-button:hover,
-.view-btn:hover,
 .logout-btn:hover{
+    background:#C62828;
     transform:translateY(-2px);
-    box-shadow:0 8px 20px rgba(0,0,0,.25);
 }
-
-/* Search */
+/* ===========================
+   Search Box
+=========================== */
 
 #search{
+    display:block;
     width:100%;
-    padding:14px;
-    margin:20px 0;
-    border:none;
-    border-radius:12px;
-    font-size:16px;
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
+    max-width:500px;
+    margin:0 auto 20px;
+    padding:12px 16px;
+    border:2px solid #4CAF50;
+    border-radius:10px;
+    outline:none;
+    font-size:15px;
 }
 
-/* Table */
+#search:focus{
+    border-color:#2196F3;
+}
+
+/* ===========================
+   Customer Table
+=========================== */
 
 .table-wrapper{
-    overflow:auto;
-    margin-top:20px;
-    border-radius:15px;
+    overflow-x:auto;
     background:#fff;
-    box-shadow:0 10px 25px rgba(0,0,0,.15);
+    border-radius:12px;
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
 }
 
 table{
@@ -169,57 +191,59 @@ thead{
     background:#2e7d32;
 }
 
-th,td{
-    padding:14px;
+th{
+    color:#fff;
+    padding:12px;
+}
+
+td{
+    padding:12px;
     text-align:center;
 }
 
-th{
-    color:#fff;
-}
-
 tbody tr:nth-child(even){
-    background:#f7f7f7;
+    background:#f5f5f5;
 }
 
 tbody tr:hover{
     background:#e8f5e9;
 }
 
-td{
-    border-bottom:1px solid #eee;
-}
-
-/* Action Buttons */
+/* ===========================
+   Edit/Delete Buttons
+=========================== */
 
 .btn{
     display:inline-block;
+    min-width:70px;
     padding:8px 14px;
-    margin:2px;
     border-radius:8px;
-    text-decoration:none;
     color:#fff;
-    font-size:14px;
-    transition:.3s;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:bold;
+    margin:2px;
 }
 
-.edit{
-    background:#1976d2;
+.btn.edit{
+    background:#2196F3;
 }
 
-.delete{
+.btn.edit:hover{
+    background:#1976D2;
+}
+
+.btn.delete{
+    background:#f44336;
+}
+
+.btn.delete:hover{
     background:#d32f2f;
 }
 
-.edit:hover{
-    background:#0d47a1;
-}
-
-.delete:hover{
-    background:#b71c1c;
-}
-
-/* Responsive */
+/* ===========================
+   Responsive
+=========================== */
 
 @media(max-width:768px){
 
@@ -228,22 +252,78 @@ td{
     }
 
     .container{
-        padding:20px;
+        padding:18px;
     }
 
-    .result p{
-        flex-direction:column;
-        gap:5px;
-        text-align:center;
+    .container form{
+        max-width:100%;
+    }
+
+    .view-btn,
+    .logout-btn,
+    .admin-link a{
+        width:100%;
     }
 
     table{
         font-size:13px;
     }
 
-    .btn{
-        display:block;
-        width:80px;
-        margin:5px auto;
+    th,
+    td{
+        padding:8px;
     }
+}
+
+/* ===========================
+   Mobile Responsive
+=========================== */
+
+@media (max-width: 768px){
+
+    .container{
+        width:90%;
+        max-width:400px;
+        margin:40px auto;
+        padding:25px 20px;
+        box-sizing:border-box;
+    }
+
+    h1,
+    h2,
+    h3{
+        font-size:24px;
+        text-align:center;
+    }
+
+    input{
+        width:100%;
+        box-sizing:border-box;
+        font-size:16px;
+    }
+
+    button,
+    .view-btn,
+    .admin-btn{
+        width:100%;
+        box-sizing:border-box;
+        font-size:16px;
+    }
+
+    .button-group{
+        display:flex;
+        flex-direction:column;
+        gap:12px;
+    }
+
+    .admin-login{
+        width:100%;
+        margin-bottom:20px;
+    }
+
+    .admin-btn{
+        margin-left:0;
+        text-align:center;
+    }
+
 }

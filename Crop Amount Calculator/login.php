@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 include "db.php";
 
@@ -9,12 +10,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
     $password = $_POST['password'];
 
-    $stmt = $db->prepare("SELECT * FROM users WHERE email = ?");
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
     $stmt->execute([$email]);
 
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if($user && password_verify($password, $user['password'])){
+    if ($user && password_verify($password, $user['password'])) {
+
+        session_regenerate_id(true);
 
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['user_name'] = $user['name'];
@@ -22,24 +25,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: index.php");
         exit();
 
-    }else{
+    } else {
 
         $message = "Invalid Email or Password.";
 
     }
-
 }
-
 ?>
 
 <!DOCTYPE html>
 <html>
+
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Login</title>
+<title>User Login</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -49,55 +51,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <div class="container">
 
-<h2>User Login</h2>
+    <h2>User Login</h2>
 
-<?php if($message!=""){ ?>
+    <?php if($message!=""){ ?>
+        <p style="color:red;text-align:center;margin-bottom:15px;">
+            <?= $message ?>
+        </p>
+    <?php } ?>
 
-<p style="color:red;text-align:center;">
-<?= $message ?>
-</p>
+    <form method="POST">
 
-<?php } ?>
+        <div class="input-group">
+            <label>Email</label>
+            <input
+                type="email"
+                name="email"
+                placeholder="Enter Email"
+                required>
+        </div>
 
-<form method="POST">
+        <div class="input-group">
+            <label>Password</label>
+            <input
+                type="password"
+                name="password"
+                placeholder="Enter Password"
+                required>
+        </div>
 
-<div class="input-group">
+        <button type="submit">
+            Login
+        </button>
 
-<label>Email</label>
+    </form>
 
-<input
-type="email"
-name="email"
-required>
+    <div class="button-group">
 
-</div>
+        <a href="register.php" class="view-btn">
+            Create Account
+        </a>
 
-<div class="input-group">
+        <a href="admin_login.php" class="logout-btn">
+            Admin Login
+        </a>
 
-<label>Password</label>
-
-<input
-type="password"
-name="password"
-required>
-
-</div>
-
-<button type="submit">
-
-Login
-
-</button>
-
-</form>
-
-<br>
-
-<a href="register.php" class="view-btn">
-
-Create New Account
-
-</a>
+    </div>
 
 </div>
 

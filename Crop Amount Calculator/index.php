@@ -1,36 +1,40 @@
 <?php
+session_start();
+
+/* Prevent browser caching */
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+header("Expires: 0");
 
 include "db.php";
 
-if(!isset($_SESSION['user_id'])){
+if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
-
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crop Amount Calculator</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
 
 <div class="container">
 
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+    <h3>Welcome, <?= htmlspecialchars($_SESSION['user_name']) ?></h3>
 
-        <h3>Welcome, <?= htmlspecialchars($_SESSION['user_name']) ?></h3>
+    <br><br>
 
-    </div>
-
-    <h1>🌾 Crop Amount Calculator</h1>
-
-    <form action="save.php" method="POST">
+    <form id="cropForm" action="save.php" method="POST">
 
         <div class="input-group">
             <label>Today's Rate</label>
@@ -42,69 +46,79 @@ if(!isset($_SESSION['user_id'])){
             <input type="text" name="customer_name" required>
         </div>
 
-        <div class="input-group">
-            <label>Length</label>
-            <input type="number" id="length" name="length" step="0.01" required>
+        <!-- Length & Breadth -->
+        <div class="form-row">
+
+            <div class="input-group">
+                <label>Length</label>
+                <input
+                    type="number"
+                    id="length"
+                    name="length"
+                    step="0.01"
+                    required>
+            </div>
+
+            <div class="input-group">
+                <label>Breadth</label>
+                <input
+                    type="number"
+                    id="breadth"
+                    name="breadth"
+                    step="0.01"
+                    required>
+            </div>
+
         </div>
 
-        <div class="input-group">
-            <label>Breadth</label>
-            <input type="number" id="breadth" name="breadth" step="0.01" required>
+        <div class="result">
+
+            <h2>Result</h2>
+
+            <p>
+                <strong>Area :</strong>
+                <span id="area">0.00</span>
+            </p>
+
+            <p>
+                <strong>Amount :</strong>
+                <span id="amount">0.00</span>
+            </p>
+
         </div>
-
-        <hr>
-
-       <div class="result">
-
-    <h2>Result</h2>
-
-    <p>
-        <strong>Area :</strong>
-        <span id="area">0.00</span>
-    </p>
-
-    <p>
-        <strong>Amount :</strong>
-         <span id="amount">0.00</span>
-    </p>
-
-</div>
 
         <input type="hidden" id="calculated_area" name="calculated_area">
         <input type="hidden" id="display_area" name="display_area">
         <input type="hidden" id="total_amount" name="amount">
 
-        <button type="button" onclick="calculate()">
-            Calculate
-        </button>
+        <div class="button-group">
 
-        <button type="submit">
-            Save Customer
-        </button>
+            <button
+                type="button"
+                class="calculate-btn"
+                onclick="calculate()">
+                Calculate
+            </button>
+
+            <button
+                type="submit"
+                id="saveBtn"
+                class="save-btn">
+                Save Customer
+            </button>
+
+            <a href="customers.php" class="view-btn">
+                View Customers
+            </a>
+
+            <a href="logout.php" class="logout-btn">
+                🚪 Logout
+            </a>
+
+        </div>
 
     </form>
 
-    <br>
-
-    <a class="view-btn" href="customers.php">
-        View My Customers
-    </a>
-<br>
-
-<a href="logout.php"
-style="
-display:block;
-width:100%;
-text-align:center;
-padding:14px;
-background:#e53935;
-color:white;
-text-decoration:none;
-border-radius:12px;
-font-weight:bold;
-transition:.3s;">
-🚪 Logout
-</a>
 </div>
 
 <script src="script.js"></script>
