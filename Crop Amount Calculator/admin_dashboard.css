@@ -147,7 +147,7 @@ tr:hover{
     border-radius:50px;
     font-size:17px;
     font-weight:bold;
-    box-shadow:0 8px 20px rgba(185,28,28,.35);
+    box-shadow:0 8px 20px rgba(184, 28, 28, 0.35);
     transition:.3s;
 }
 
