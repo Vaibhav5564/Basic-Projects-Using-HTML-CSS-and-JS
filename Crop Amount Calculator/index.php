@@ -108,7 +108,11 @@ if (!isset($_SESSION['user_id'])) {
             </button>
 
             <a href="customers.php" class="view-btn">
-                View Customers
+                👥 View Customers
+            </a>
+
+            <a href="change_password.php" class="view-btn">
+                🔒 Change Password
             </a>
 
             <a href="logout.php" class="logout-btn">
@@ -122,6 +126,7 @@ if (!isset($_SESSION['user_id'])) {
 </div>
 
 <script src="script.js"></script>
+
 <script>
 window.addEventListener("pageshow", function (event) {
     if (event.persisted) {
@@ -129,5 +134,6 @@ window.addEventListener("pageshow", function (event) {
     }
 });
 </script>
+
 </body>
 </html>

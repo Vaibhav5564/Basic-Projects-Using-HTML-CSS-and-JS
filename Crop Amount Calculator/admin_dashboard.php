@@ -22,7 +22,17 @@ $totalCustomers = $pdo->query("SELECT COUNT(*) FROM customers")->fetchColumn();
 $totalAmount = $pdo->query("SELECT IFNULL(SUM(amount),0) FROM customers")->fetchColumn();
 
 $users = $pdo->query("SELECT * FROM users ORDER BY id DESC");
-$customers = $pdo->query("SELECT * FROM customers ORDER BY id DESC");
+
+/* UPDATED QUERY */
+$customers = $pdo->query("
+    SELECT
+        customers.*,
+        users.name AS user_name
+    FROM customers
+    INNER JOIN users
+        ON customers.user_id = users.id
+    ORDER BY customers.id DESC
+");
 ?>
 
 <!DOCTYPE html>
@@ -112,13 +122,14 @@ $customers = $pdo->query("SELECT * FROM customers ORDER BY id DESC");
     <th>Rate</th>
     <th>Amount</th>
 </tr>
+
 <?php while($customer = $customers->fetch(PDO::FETCH_ASSOC)){ ?>
 
 <tr>
 
     <td><?= $customer['user_id'] ?></td>
 
-      <td><?= htmlspecialchars($customer['user_name']) ?></td>
+    <td><?= htmlspecialchars($customer['user_name']) ?></td>
 
     <td><?= htmlspecialchars($customer['customer_name']) ?></td>
 
@@ -145,6 +156,7 @@ $customers = $pdo->query("SELECT * FROM customers ORDER BY id DESC");
         🚪 Logout
     </a>
 </div>
+
 <script>
 window.addEventListener("pageshow", function (event) {
     if (event.persisted) {
@@ -152,6 +164,6 @@ window.addEventListener("pageshow", function (event) {
     }
 });
 </script>
-</body>
 
+</body>
 </html>

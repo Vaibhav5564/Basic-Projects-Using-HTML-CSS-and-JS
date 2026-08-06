@@ -1,33 +1,37 @@
 <?php
 
+require __DIR__ . '/vendor/autoload.php';
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'PHPMailer/src/Exception.php';
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
-
-function sendOTP($toEmail, $otp){
-
+function sendOTP($toEmail, $otp)
+{
     $mail = new PHPMailer(true);
 
-    try{
+    try {
+
+        // Disable debug in production
+        $mail->SMTPDebug = 0;
 
         $mail->isSMTP();
-
         $mail->Host = 'smtp.gmail.com';
-
         $mail->SMTPAuth = true;
 
-        $mail->Username = 'YOUR_GMAIL@gmail.com';
+        // CHANGE THIS TO YOUR GMAIL ADDRESS
+        $mail->Username = "vaibhavadsul5564@gmail.com";
 
-        $mail->Password = 'YOUR_16_CHARACTER_APP_PASSWORD';
+        // CHANGE THIS TO YOUR 16-CHARACTER APP PASSWORD
+        $mail->Password = "zwlaexqtaoxjbhqp";
 
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-
         $mail->Port = 587;
 
-        $mail->setFrom('YOUR_GMAIL@gmail.com','Crop Amount Calculator');
+        // Must be the same Gmail as Username
+        $mail->setFrom(
+            'yourgmail@gmail.com',
+            'Crop Amount Calculator'
+        );
 
         $mail->addAddress($toEmail);
 
@@ -40,22 +44,24 @@ function sendOTP($toEmail, $otp){
 
             <p>Your OTP is:</p>
 
-            <h1 style='color:blue;'>$otp</h1>
+            <h1 style='color:#2563eb;'>$otp</h1>
 
-            <p>This OTP is valid for 10 minutes.</p>
+            <p>This OTP is valid for <b>10 minutes</b>.</p>
 
             <p>Please do not share this OTP with anyone.</p>
         ";
+
+        $mail->AltBody = "Your OTP is: $otp. It is valid for 10 minutes.";
 
         $mail->send();
 
         return true;
 
-    }catch(Exception $e){
+    } catch (Exception $e) {
+
+        error_log("PHPMailer Error: " . $mail->ErrorInfo);
 
         return false;
-
     }
-
 }
 ?>
