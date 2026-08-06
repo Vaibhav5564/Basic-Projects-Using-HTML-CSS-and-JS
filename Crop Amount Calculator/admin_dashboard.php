@@ -103,17 +103,22 @@ $customers = $pdo->query("SELECT * FROM customers ORDER BY id DESC");
 <table>
 
 <tr>
-    <th>Name</th>
+    <th>User ID</th>
+    <th>User Name</th>
+    <th>Customer</th>
     <th>Length</th>
     <th>Breadth</th>
     <th>Area</th>
     <th>Rate</th>
     <th>Amount</th>
 </tr>
-
 <?php while($customer = $customers->fetch(PDO::FETCH_ASSOC)){ ?>
 
 <tr>
+
+    <td><?= $customer['user_id'] ?></td>
+
+      <td><?= htmlspecialchars($customer['user_name']) ?></td>
 
     <td><?= htmlspecialchars($customer['customer_name']) ?></td>
 

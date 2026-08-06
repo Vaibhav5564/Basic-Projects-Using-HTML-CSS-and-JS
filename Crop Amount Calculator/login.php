@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <?php if($message!=""){ ?>
         <p style="color:red;text-align:center;margin-bottom:15px;">
-            <?= $message ?>
+            <?= htmlspecialchars($message) ?>
         </p>
     <?php } ?>
 
@@ -77,6 +77,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 name="password"
                 placeholder="Enter Password"
                 required>
+        </div>
+
+        <!-- Forgot Password Link -->
+        <div style="text-align:right; margin-bottom:15px;">
+            <a href="forgot_password.php"
+               style="color:white; text-decoration:none; font-weight:bold;">
+                Forgot Password?
+            </a>
         </div>
 
         <button type="submit">

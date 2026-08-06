@@ -18,6 +18,10 @@ try {
 
             password TEXT NOT NULL,
 
+            reset_otp TEXT,
+
+            otp_expiry DATETIME,
+
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 
         )
