@@ -11,47 +11,47 @@ function sendOTP($toEmail, $otp)
 
     try {
 
-        // Disable debug in production
-        $mail->SMTPDebug = 0;
-
+        // SMTP Configuration
         $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
+        $mail->Host = getenv('MAIL_HOST') ?: 'smtp.gmail.com';
         $mail->SMTPAuth = true;
 
-        // CHANGE THIS TO YOUR GMAIL ADDRESS
-        $mail->Username = "vaibhavadsul5564@gmail.com";
+        // Gmail Account
+        $mail->Username = getenv('MAIL_USERNAME') ?: 'vaibhavadsul5564@gmail.com';
 
-        // CHANGE THIS TO YOUR 16-CHARACTER APP PASSWORD
-        $mail->Password = "zwlaexqtaoxjbhqp";
+        // Gmail App Password
+        $mail->Password = getenv('MAIL_PASSWORD') ?: 'zwlaexqtaoxjbhqp';
 
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port = 587;
+        $mail->Port = getenv('MAIL_PORT') ?: 587;
 
-        // Must be the same Gmail as Username
+        // Sender
         $mail->setFrom(
-            'yourgmail@gmail.com',
-            'Crop Amount Calculator'
+            getenv('MAIL_FROM') ?: 'vaibhavadsul5564@gmail.com',
+            getenv('MAIL_FROM_NAME') ?: 'Crop Amount Calculator'
         );
 
+        // Recipient
         $mail->addAddress($toEmail);
 
+        // Email
         $mail->isHTML(true);
-
         $mail->Subject = 'Password Reset OTP';
 
         $mail->Body = "
-            <h2>Password Reset</h2>
+            <h2>Password Reset OTP</h2>
 
-            <p>Your OTP is:</p>
+            <p>Your One-Time Password is:</p>
 
             <h1 style='color:#2563eb;'>$otp</h1>
 
             <p>This OTP is valid for <b>10 minutes</b>.</p>
 
-            <p>Please do not share this OTP with anyone.</p>
+            <p>If you did not request this, please ignore this email.</p>
         ";
 
-        $mail->AltBody = "Your OTP is: $otp. It is valid for 10 minutes.";
+        $mail->AltBody =
+            "Your OTP is: $otp. It is valid for 10 minutes.";
 
         $mail->send();
 
@@ -64,4 +64,5 @@ function sendOTP($toEmail, $otp)
         return false;
     }
 }
+
 ?>
