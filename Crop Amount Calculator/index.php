@@ -19,11 +19,14 @@ if (!isset($_SESSION['user_id'])) {
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Crop Amount Calculator</title>
 
     <link rel="stylesheet" href="index.css">
+
 </head>
 
 <body>
@@ -32,21 +35,25 @@ if (!isset($_SESSION['user_id'])) {
 
     <h3>Welcome, <?= htmlspecialchars($_SESSION['user_name']) ?></h3>
 
-    <br><br>
-
     <form id="cropForm" action="save.php" method="POST">
 
         <div class="input-group">
             <label>Today's Rate</label>
-            <input type="number" id="rate" name="rate" required>
+            <input
+                type="number"
+                id="rate"
+                name="rate"
+                required>
         </div>
 
         <div class="input-group">
             <label>Customer Name</label>
-            <input type="text" name="customer_name" required>
+            <input
+                type="text"
+                name="customer_name"
+                required>
         </div>
 
-        <!-- Length & Breadth -->
         <div class="form-row">
 
             <div class="input-group">
@@ -128,7 +135,7 @@ if (!isset($_SESSION['user_id'])) {
 <script src="script.js"></script>
 
 <script>
-window.addEventListener("pageshow", function (event) {
+window.addEventListener("pageshow", function(event) {
     if (event.persisted) {
         window.location.reload();
     }
@@ -136,4 +143,5 @@ window.addEventListener("pageshow", function (event) {
 </script>
 
 </body>
+
 </html>
