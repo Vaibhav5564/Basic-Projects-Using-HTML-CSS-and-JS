@@ -11,7 +11,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $email = trim($_POST['email']);
 
-    $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
+    $stmt = $pdo->prepare("
+        SELECT id
+        FROM users
+        WHERE email = ?
+    ");
+
     $stmt->execute([$email]);
 
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -22,9 +27,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     } else {
 
-        $otp = rand(100000, 999999);
+        $otp = random_int(100000, 999999);
 
-        $expiry = date("Y-m-d H:i:s", strtotime("+10 minutes"));
+        $expiry = date(
+            "Y-m-d H:i:s",
+            strtotime("+10 minutes")
+        );
 
         $update = $pdo->prepare("
             UPDATE users
@@ -32,7 +40,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             WHERE email = ?
         ");
 
-        $update->execute([$otp, $expiry, $email]);
+        $update->execute([
+            $otp,
+            $expiry,
+            $email
+        ]);
 
         if (sendOTP($email, $otp)) {
 
@@ -44,7 +56,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
 
             $message = "Unable to send OTP. Please try again.";
-
         }
     }
 }
@@ -52,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
@@ -70,43 +81,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <div class="container">
 
-<h2>Forgot Password</h2>
+    <h2>Forgot Password</h2>
 
-<?php if($message != ""){ ?>
+    <?php if ($message != "") { ?>
 
-<p style="color:red;text-align:center;margin-bottom:15px;">
-<?= htmlspecialchars($message) ?>
-</p>
+        <p style="color:red;text-align:center;margin-bottom:15px;">
+            <?= htmlspecialchars($message) ?>
+        </p>
 
-<?php } ?>
+    <?php } ?>
 
-<form method="POST">
+    <form method="POST">
 
-<div class="input-group">
+        <div class="input-group">
 
-<label>Email Address</label>
+            <label>Email Address</label>
 
-<input
-type="email"
-name="email"
-placeholder="Enter your registered email"
-required>
+            <input
+                type="email"
+                name="email"
+                placeholder="Enter your registered email"
+                required>
 
-</div>
+        </div>
 
-<button type="submit">
-Send OTP
-</button>
+        <button type="submit">
+            Send OTP
+        </button>
 
-</form>
+    </form>
 
-<br>
+    <br>
 
-<a href="login.php" class="view-btn">
-← Back to Login
-</a>
+    <a href="login.php" class="view-btn">
+        ← Back to Login
+    </a>
 
 </div>
 
 </body>
+
 </html>
